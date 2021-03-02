@@ -1,0 +1,31 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.register__wrapper {
+    background-color: #bbb097ab;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    padding-left: 15vw;
+}
+.register__box {
+    margin-top: 5vh;
+    background-color: ghostwhite;
+    margin-left: 10vw;
+    width: 50vw;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 10px;
+}
+.registerInfo label{
+    margin-top: 20px;
+}
+.btn {
+    margin-top: 20px;
+}
+
+ul {
+    height: 70px;
+}

@@ -1,0 +1,47 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+.create__wrapper {
+    background-color: #bbb097ab;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+}
+.home__wrapper img {
+    width: 70vw;
+    margin-left: 7vw;
+    margin-top: -10px;
+}
+.top__banner {
+    margin-top: 5vh;
+    background-color: white;
+    padding-left: 2vw;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 85vw;
+    margin-left: 7vw;
+    border-radius: 15px;
+}
+.top__banner * {
+    margin-left: 15px;
+}
+.top__banner ul {
+    display: flex;
+    list-style-type: none;
+}
+.top__banner ul li {
+    margin-top: 12px;
+}
+.top__banner button {
+    margin-right: 2vw;
+    margin-top: 6px;
+}
+.form__wrapper {
+    margin-left: 25vw;
+    width: 50vw;
+    background-color: white;
+    margin-top: 25px;
+    padding: 25px;
+}

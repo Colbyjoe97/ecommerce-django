@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="login__wrapper">
+        <div class="login__box card text-center">
+            <h1 class="text-center card-body">Login</h1>
+            {% if messages %}
+                <ul id="errors">
+                    {% for message in messages %}
+                        <li class="text-danger">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="login" method="post">
+                {% csrf_token %}
+                <div class="loginInfo text-left">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" name="userEmail">
+                </div>
+                <div class="loginInfo text-left">
+                    <label for="password">Password:</label>
+                    <input type="text" class="form-control" name="pass">
+                </div>
+                <input class="btn btn-success" type="submit" value="login">
+            </form>
+            <p class="m-4">Don't have an account? Sign up <a href="/register">here</a></p>
+        </div>
+    </div>
+</body>
+</html>

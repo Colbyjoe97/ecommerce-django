@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'create.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="create__wrapper">
+        <div class="top__banner">
+            <ul>
+                <a href="/home"><li>Home</li></a>
+                <a href=""><li>Cart</li></a>
+                {% if loggedInUser.admin == 1 %}
+                    <a href="/createItem"><li>Create Item</li></a>
+                {% endif %}
+            </ul>
+            <form action="logout" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+        <div class="form__wrapper">
+            {% if messages %}
+                <ul id="errors">
+                    {% for message in messages %}
+                        <li class="text-danger">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="createProduct" method="post">
+                {% csrf_token %}
+                <div class="formInput">
+                    <label for="prodName">Product Name:</label>
+                    <input class="form-control" type="text" name="pName">
+                </div>
+                <div class="formInput">
+                    <label for="image">Image URL:</label>
+                    <input class="form-control" type="text" name="pImage">
+                </div>
+                <div class="formInput">
+                    <label for="description">Product Description:</label>
+                    <input class="form-control" type="text" name="description">
+                </div>
+                <div class="formInput">
+                    <label for="prodName">Price:</label>
+                    <input class="form-control" type="text" name="price">
+                </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-success">Create Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
