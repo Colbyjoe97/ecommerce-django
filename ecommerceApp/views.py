@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
 import bcrypt
+import math
 
 # LOGIN PAGE
 def index(request):
@@ -96,6 +97,42 @@ def createProduct(request):
         # Store the id of the logged in user using session
     return redirect("/home")
 
+
+# SHOPPING CART PAGE
+def cartPage(request):
+    total = 0
+    tax = 0.00
+    orderTotal = 0.00
+    for product in Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId'])):
+        total = total + product.price
+
+    for product in Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId'])):
+        tax = tax + (float(product.price) * .06)
+
+    tax = round(tax, 2)
+    orderTotal = float(total) + tax
+    orderTotal = round(orderTotal, 2)
+    context = {
+        'loggedInUser': User.objects.get(id=request.session['loggedInId']),
+        'allProducts': Product.objects.all(),
+        'total': total,
+        'tax': tax,
+        'orderTotal': orderTotal,
+        'cartItems': Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId']))
+    }
+    return render(request, "cart.html", context)
+
+
+# ADD TO CART
+def addToCart(request, prodId):
+    Product.objects.get(id=prodId).purchased_by.add(User.objects.get(id=request.session['loggedInId']))
+    return redirect('/home')
+
+
+# REMOVE FROM CART
+def removeFromCart(request, prodId):
+    Product.objects.get(id=prodId).purchased_by.remove(User.objects.get(id=request.session['loggedInId']))
+    return redirect('/cart')
 
 # LOGOUT OF ACCOUNT
 def logout(request):

@@ -14,7 +14,7 @@
         <div class="top__banner">
             <ul>
                 <a href="/home"><li>Home</li></a>
-                <a href=""><li>Cart</li></a>
+                <a href="/cart"><li>Cart</li></a>
                 {% if loggedInUser.admin == 1 %}
                     <a href="/createItem"><li>Create Item</li></a>
                 {% endif %}
@@ -25,22 +25,21 @@
             </form>
         </div>
         <div class="home__body">
-            <h1 class="text-center">Hello {{ loggedInUser.first_name }}</h1>
             <div class="products">
             {% for product in allProducts %}
-                <div class="eachProduct">
-                    <div class="prodImage">
-                        <img src="{{product.image}}" alt="{{product.prodName}}">
-                    </div>
-                    <div class="prodName">
-                        <h1>{{ product.prodName }}</h1>
-                    </div>
-                    <div class="prodDesc">
-                        <p>{{ product.description }}</p>
-                    </div>
-                    <p>{{ product.price }}</p>
-                    <a href="/createItem"><button class="btn btn-success">Add to Cart</button></a>
+            <div class="eachProduct">
+                <div class="prodImage">
+                    <img src="{{product.image}}" alt="{{product.prodName}}">
                 </div>
+                <div class="prodName">
+                    <h1>{{ product.prodName }}</h1>
+                </div>
+                <div class="prodDesc">
+                    <p>{{ product.description }}</p>
+                </div>
+                <p>{{ product.price }}</p>
+                <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
+            </div>
             {% endfor %}
             </div>
         </div>

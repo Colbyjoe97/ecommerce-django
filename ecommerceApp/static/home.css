@@ -45,6 +45,7 @@
     display: inline-flex;
     text-align: center;
     margin-left: 7vw;
+    margin-top: 15px;
 }
 .eachProduct {
     background-color: white;
@@ -53,13 +54,13 @@
 }
 .eachProduct img {
     padding-top: 15px;
-    width: 250px;
+    width: 100px;
+    height: 100px;
     margin-left: 0px;
 }
 .eachProduct p {
     width: 250px;
 }
-
 @media (max-width: 740px) {
     .products {
         flex-direction: column;
