@@ -1,0 +1,133 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+button a {
+    color: white;
+}
+.home__wrapper {
+    background-color: #bbb097ab;
+    padding: 10px;
+    height: 100vh;
+}
+.home__wrapper img {
+    width: 70vw;
+    margin-left: 7vw;
+    margin-top: -10px;
+}
+.top__banner {
+    margin-top: 5vh;
+    background-color: white;
+    padding-left: 2vw;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 85vw;
+    margin-left: 7vw;
+    border-radius: 15px;
+}
+.top__banner * {
+    margin-left: 15px;
+}
+.top__banner ul {
+    display: flex;
+    list-style-type: none;
+}
+.top__banner ul li {
+    margin-top: 12px;
+}
+.top__banner button {
+    margin-right: 2vw;
+    margin-top: 6px;
+}
+.products {
+    text-align: center;
+    justify-content: left;
+}
+.eachProduct {
+    display: inline-flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.eachProduct img {
+    padding-top: 15px;
+    width: 100px;
+    height: 100px;
+    margin-left: 0px;
+}
+.eachProduct p {
+    width: 250px;
+    height: 100px;
+}
+.prodPrice {
+    height: 50px;
+}
+.prodName {
+    width: 250px;
+    height: 100px;
+}
+.hamburgerOptions ul li {
+    list-style-type: none;
+    margin-top: 10px;
+}
+@media (max-width: 455px) {
+    .top__banner {
+        display: none;
+    }
+    .hamburger img {
+        width: 50px;
+        margin-left: 74vw;
+    }
+    .hamburgerOptions {
+        background-color: white;
+        padding: 15px;
+        text-align: right;
+        width: 84vw;
+        margin-left: 7vw;
+    }
+    .top__banner {
+        display: none;
+    }
+    .picture {
+        display: none;
+    }
+    .hamburger img{
+        margin-top: 5px;
+    }
+}
+@media (min-width: 456px) {
+    .hamburger {
+        display: none;
+    }
+}
+@media (max-width: 740px) {
+    .products {
+        flex-direction: column;
+    }
+    .home__wrapper {
+        height: 100%;
+    }
+    .eachProduct {
+        margin-top: 15px;
+        margin-left: 0;
+        width: 82vw;
+    }
+    .prodDesc p, .prodPrice p{
+        width: 80vw;
+        margin-left: -15px;
+    }
+    .prodName {
+        width: 100%;
+    }
+}
+@media (max-width: 661px) {
+    .home__wrapper {
+        padding: 0px;
+        padding-top: 1vh;
+        padding-bottom: 5vh;
+        height: 100%;
+    }
+}

@@ -5,8 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous">
+    </script>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <script src="{% static 'js/hamburger.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <title>Document</title>
 </head>
 <body>
@@ -24,6 +30,18 @@
                 <button class="btn btn-danger">Logout</button>
             </form>
         </div>
+        <div class="hamburger">
+            <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/hamburger-148-639651.png" alt="Hamburger">
+        </div>
+        <div class="hamburgerOptions">
+            <ul>
+                <a href="/home"><li>Home</li></a>
+                <a href="/cart"><li>Cart</li></a>
+                {% if loggedInUser.admin == 1 %}
+                    <a href="/createItem"><li>Create Item</li></a>
+                {% endif %}
+            </ul>
+        </div>
         <div class="home__body">
             <div class="products">
             {% for product in allProducts %}
@@ -37,8 +55,13 @@
                 <div class="prodDesc">
                     <p>{{ product.description }}</p>
                 </div>
-                <p>{{ product.price }}</p>
+                <div class="prodPrice">
+                    <p>{{ product.price }}</p>
+                </div>
                 <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
+                {% if loggedInUser.admin == True %}
+                <button class="btn btn-danger mt-2"><a href="deleteProduct/{{product.id}}">Delete</a></button>
+                {% endif %}
             </div>
             {% endfor %}
             </div>

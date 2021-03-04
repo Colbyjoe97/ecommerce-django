@@ -98,6 +98,12 @@ def createProduct(request):
     return redirect("/home")
 
 
+# DELETE ITEM
+def deleteProduct(request, prodId):
+    productToDelete = Product.objects.get(id=prodId)
+    productToDelete.delete()
+    return redirect('/home')
+
 # SHOPPING CART PAGE
 def cartPage(request):
     total = 0
