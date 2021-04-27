@@ -20,29 +20,60 @@
         <div class="top__banner">
             <ul>
                 <a href="/home"><li>Home</li></a>
-                <a href="/cart"><li>Cart</li></a>
-                {% if loggedInUser.admin == 1 %}
+                <a href="/cart">
+                    <li>Cart <b>({{ orderedItems.count }})</b></li></a>
+                    {% if loggedInUser.admin == 1 %}
                     <a href="/createItem"><li>Create Item</li></a>
-                {% endif %}
-            </ul>
-            <form action="logout" method="post">
-                {% csrf_token %}
-                <button class="btn btn-danger">Logout</button>
-            </form>
-        </div>
-        <div class="hamburger">
-            <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/hamburger-148-639651.png" alt="Hamburger">
-        </div>
-        <div class="hamburgerOptions">
-            <ul>
-                <a href="/home"><li>Home</li></a>
-                <a href="/cart"><li>Cart</li></a>
-                {% if loggedInUser.admin == 1 %}
+                    {% endif %}
+                </ul>
+                <form action="logout" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+            <div class="hamburger">
+                <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/hamburger-148-639651.png" alt="Hamburger">
+            </div>
+            <div class="hamburgerOptions">
+                <ul>
+                    <a href="/home"><li>Home</li></a>
+                    <a href="/cart"><li>Cart {{ cartItems.count }}</li></a>
+                    {% if loggedInUser.admin == 1 %}
                     <a href="/createItem"><li>Create Item</li></a>
+                    {% endif %}
+                </ul>
+            </div>
+        <div class="tShirt">
+            <div class="category text-center">
+                <h1>T-Shirts</h1>
+            </div>
+            <div class="products">
+            {% for product in allProducts %}
+            <div class="eachProduct">
+                <div class="prodImage">
+                    <img src="{{product.image}}" alt="{{product.prodName}}">
+                </div>
+                <div class="prodName">
+                    <h1>{{ product.prodName }}</h1>
+                </div>
+                <div class="prodDesc">
+                    <p>{{ product.description }}</p>
+                </div>
+                <div class="prodPrice">
+                    <p>{{ product.price }}</p>
+                </div>
+                <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
+                {% if loggedInUser.admin == True %}
+                <button class="btn btn-danger mt-2"><a href="deleteProduct/{{product.id}}">Delete</a></button>
                 {% endif %}
-            </ul>
+            </div>
+            {% endfor %}
+            </div>
         </div>
-        <div class="home__body">
+        <div class="longSleeve">
+            <div class="category text-center">
+                <h1>Long Sleeve Shirts</h1>
+            </div>
             <div class="products">
             {% for product in allProducts %}
             <div class="eachProduct">

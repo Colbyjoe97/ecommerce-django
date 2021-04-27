@@ -48,27 +48,35 @@
                     <tr>
                         <td class="picture">Image</td>
                         <td>Name</td>
+                        <td>Quantity</td>
                         <td>Price</td>
                         <td>Actions</td>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for product in cartItems %}
-                    <tr>
-                        <td class="picture"><img src={{product.image}}></td>
-                        <td>{{product.prodName}}</td>
-                        <td>{{product.price}}</td>
-                        <td><a href="removeCart/{{product.id}}">Remove</a></td>
-                    </tr>
+                    {% for product in orderedItems %}
+                        <tr>
+                            <td class="picture"><img src={{product.item.image}}></td>
+                            <td>{{product.item.prodName}}</td>
+                            <td>
+                                   <a href="/remove/{{product.item.id}}"><b class="qty">-</b></a><b class="qty">{{ product.quantity }}</b><a href="/add/{{product.item.id}}"><b class="qty">+</b>
+                            </td>
+                            <td>{{product.item.price}}</td>
+                            <td><a href="removeCart/{{product.item.id}}">Remove</a></td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
         <div class="product__total">
-            <p>Subtotal: {{total}}</p>
-            <p>Tax: {{tax}}</p>
+            <p>Subtotal: <b>${{total}}</b></p>
+            <p>Tax: <b>${{tax}}</b></p>
+            <p>Shipping: <b>${{shipping}}</b></p>
             <p>----------------</p>
-            <p>Order Total: {{orderTotal}}</p>
+            <p>Order Total: <b>${{orderTotal}}</b></p>
+            <form action="placeOrder">
+                <button class="btn btn-success">Place Order</button>
+            </form>
         </div>
     </div>
 </body>

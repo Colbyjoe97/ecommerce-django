@@ -8,7 +8,7 @@ button a {
 .home__wrapper {
     background-color: #bbb097ab;
     padding: 10px;
-    height: 100vh;
+    height: 100%;
 }
 .home__wrapper img {
     width: 70vw;
@@ -36,6 +36,10 @@ button a {
 .top__banner ul li {
     margin-top: 12px;
 }
+.top__banner ul li b {
+    color: black;
+    margin-left: 3px;
+}
 .top__banner button {
     margin-right: 2vw;
     margin-top: 6px;
@@ -43,6 +47,13 @@ button a {
 .products {
     text-align: center;
     justify-content: left;
+
+    /* width: 500px; */
+    padding: 10px;
+    margin-left: 6vw;
+    display: inline-flex;
+    overflow: auto;
+    overflow-y: hidden;
 }
 .eachProduct {
     display: inline-flex;
