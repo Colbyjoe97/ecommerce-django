@@ -20,8 +20,7 @@
         <div class="top__banner">
             <ul>
                 <a href="/home"><li>Home</li></a>
-                <a href="/cart">
-                    <li>Cart <b>({{ orderedItems.count }})</b></li></a>
+                <a href="/cart"><li>Cart </a><b>({{ orderedItems.count }})</b></li>
                     {% if loggedInUser.admin == 1 %}
                     <a href="/createItem"><li>Create Item</li></a>
                     {% endif %}

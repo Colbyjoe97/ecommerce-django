@@ -20,7 +20,7 @@
         <div class="top__banner">
             <ul>
                 <a href="/home"><li>Home</li></a>
-                <a href="/cart"><li>Cart</li></a>
+                <a href="/cart"><li>Cart</a><b>({{ orderedItems.count }})</b></li>
                 {% if loggedInUser.admin == 1 %}
                     <a href="/createItem"><li>Create Item</li></a>
                 {% endif %}
@@ -36,7 +36,7 @@
         <div class="hamburgerOptions">
             <ul>
                 <a href="/home"><li>Home</li></a>
-                <a href="/cart"><li>Cart</li></a>
+                <li>Cart</a><b>({{ orderedItems.count }})</b></li>
                 {% if loggedInUser.admin == 1 %}
                     <a href="/createItem"><li>Create Item</li></a>
                 {% endif %}
@@ -71,8 +71,9 @@
         <div class="product__total">
             <p>Subtotal: <b>${{total}}</b></p>
             <p>Tax: <b>${{tax}}</b></p>
-            <p>Shipping: <b>${{shipping}}</b></p>
+            <p>Subtotal: <b>${{subtotal}}</b></p>
             <p>----------------</p>
+            <p>Shipping: <b>${{shipping}}</b></p>
             <p>Order Total: <b>${{orderTotal}}</b></p>
             <form action="placeOrder">
                 <button class="btn btn-success">Place Order</button>
