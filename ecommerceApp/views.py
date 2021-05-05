@@ -66,21 +66,27 @@ def createAdmin(request):
 
 
 # SUCCESSFUL LOGIN / REGISTER
+<<<<<<< HEAD
 def homePage(request):
     count = 0;
+=======
+def success(request):
+    count = 0
+>>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
     if 'loggedInId' not in request.session:
         messages.error(request, "You must be logged in to view that page.")
         return redirect('/')
     context = {
         'loggedInUser': User.objects.get(id=request.session['loggedInId']),
         'cartItems': Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId'])),
-        'cartCount': count,
         'allProducts': Product.objects.all(),
+<<<<<<< HEAD
         'orderedItems': OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId'])),
         'featuredProducts': Product.objects.filter(featured=True),
+=======
+        'orderedItems': OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId']))
+>>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
     }
-    for product in Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId'])):
-        count += 1
     return render(request, "home.html", context)
 
 
@@ -100,8 +106,12 @@ def createProduct(request):
             messages.error(request, value)
         return redirect("/createItem")
     else:
+<<<<<<< HEAD
         newProduct = Product.objects.create(prodName=request.POST['pName'], description=request.POST['description'], image=request.POST['pImage'], price=request.POST['price'], category=request.POST['category'], type=request.POST['type'], created_by=User.objects.get(id=request.session['loggedInId']))
         # Store the id of the logged in user using session
+=======
+        newProduct = Product.objects.create(prodName=request.POST['pName'], description=request.POST['description'], image=request.POST['pImage'], price=request.POST['price'], created_by=User.objects.get(id=request.session['loggedInId']))
+>>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
     return redirect("/home")
 
 def featureProduct(request, prodId):
@@ -120,20 +130,30 @@ def deleteProduct(request, prodId):
 # SHOPPING CART PAGE
 def cartPage(request):
     total = 0
-    tax = 0.00
+    tax = 0
     orderTotal = 0.00
+    shipping = 0
     for product in OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId'])):
         total += product.item.price * product.quantity
-        tax = tax + (float(product.item.price) * .06)
+        tax += (float(product.item.price * product.quantity) * .06)
 
     tax = round(tax, 2)
     orderTotal = float(total) + tax
     orderTotal = round(orderTotal, 2)
+<<<<<<< HEAD
     if float(total) >= 50:
+=======
+    if orderTotal > 50:
+>>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
         shipping = 0
     else:
         shipping = 10
+    subtotal = round(orderTotal + tax, 2)
     orderTotal += shipping
+    if shipping == 0:
+        orderTotal = subtotal
+    else:
+        orderTotal = round(subtotal + shipping, 2)
     context = {
         'loggedInUser': User.objects.get(id=request.session['loggedInId']),
         'allProducts': Product.objects.all(),
@@ -141,6 +161,7 @@ def cartPage(request):
         'tax': tax,
         'orderTotal': orderTotal,
         'shipping': shipping,
+        'subtotal': subtotal,
         'cartItems': Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId'])),
         'orderedItems': OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId']))
     }
