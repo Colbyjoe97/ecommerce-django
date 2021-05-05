@@ -11,50 +11,41 @@
         crossorigin="anonymous">
     </script>
     {% load static %}
-    <script src="{% static 'js/hamburger.js' %}"></script>
+    <!-- <script src="{% static 'js/hamburger.js' %}"></script> -->
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <title>Document</title>
 </head>
 <body>
+    {% include 'partials/_banner.html' %}
     <div class="home__wrapper">
-        <div class="top__banner">
-            <ul>
-                <a href="/home"><li>Home</li></a>
-                <a href="/cart">
-                    <li>Cart <b>({{ orderedItems.count }})</b></li></a>
-                    {% if loggedInUser.admin == 1 %}
-                    <a href="/createItem"><li>Create Item</li></a>
-                    {% endif %}
-                </ul>
-                <form action="logout" method="post">
-                    {% csrf_token %}
-                    <button class="btn btn-danger">Logout</button>
-                </form>
-            </div>
-            <div class="hamburger">
-                <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/hamburger-148-639651.png" alt="Hamburger">
-            </div>
-            <div class="hamburgerOptions">
-                <ul>
-                    <a href="/home"><li>Home</li></a>
-                    <a href="/cart"><li>Cart {{ cartItems.count }}</li></a>
-                    {% if loggedInUser.admin == 1 %}
-                    <a href="/createItem"><li>Create Item</li></a>
-                    {% endif %}
-                </ul>
-            </div>
+
+
+        <h1 class="text-center">Featured Items</h1>
+        <div class="featured text-center">
+            {% for product in featuredProducts %}
+                <div class="featuredProd">
+                    <div class="featuredHeader">
+                        <img src="{{product.image}}" alt="">
+                        <b>{{product.prodName}}</b>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
         <div class="tShirt">
             <div class="category text-center">
                 <h1>T-Shirts</h1>
             </div>
             <div class="products">
             {% for product in allProducts %}
+                {% if product.type == 'shirt' %}
             <div class="eachProduct">
                 <div class="prodImage">
                     <img src="{{product.image}}" alt="{{product.prodName}}">
                 </div>
                 <div class="prodName">
-                    <h1>{{ product.prodName }}</h1>
+                    <b>{{ product.prodName }}</b>
                 </div>
                 <div class="prodDesc">
                     <p>{{ product.description }}</p>
@@ -64,24 +55,31 @@
                 </div>
                 <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
                 {% if loggedInUser.admin == True %}
-                <button class="btn btn-danger mt-2"><a href="deleteProduct/{{product.id}}">Delete</a></button>
+                    <div class=" mt-2">
+                        <a href="delete/{{product.id}}"><button class="btn btn-danger">Delete</button></a>
+                        {% if product.featured == False %}
+                        <a href="feature/{{product.id}}"><button class="btn btn-secondary">Feature Item</button></a>
+                        {% endif %}
+                    </div>
                 {% endif %}
             </div>
+                {% endif %}
             {% endfor %}
             </div>
         </div>
-        <div class="longSleeve">
+        <div class="shoes">
             <div class="category text-center">
-                <h1>Long Sleeve Shirts</h1>
+                <h1>Shoes</h1>
             </div>
             <div class="products">
             {% for product in allProducts %}
+                {% if product.type == 'shoes' %}
             <div class="eachProduct">
                 <div class="prodImage">
                     <img src="{{product.image}}" alt="{{product.prodName}}">
                 </div>
                 <div class="prodName">
-                    <h1>{{ product.prodName }}</h1>
+                    <b>{{ product.prodName }}</b>
                 </div>
                 <div class="prodDesc">
                     <p>{{ product.description }}</p>
@@ -91,9 +89,15 @@
                 </div>
                 <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
                 {% if loggedInUser.admin == True %}
-                <button class="btn btn-danger mt-2"><a href="deleteProduct/{{product.id}}">Delete</a></button>
+                    <div class=" mt-2">
+                        <a href="delete/{{product.id}}"><button class="btn btn-danger">Delete</button></a>
+                        {% if product.featured == False %}
+                        <a href="feature/{{product.id}}"><button class="btn btn-secondary">Feature Item</button></a>
+                        {% endif %}
+                    </div>
                 {% endif %}
             </div>
+                {% endif %}
             {% endfor %}
             </div>
         </div>

@@ -6,8 +6,9 @@ button a {
     color: white;
 }
 .home__wrapper {
-    background-color: #bbb097ab;
-    padding: 10px;
+    background-color: #e0dfda;
+    /* padding: 10px; */
+    padding-top: 6vh;
     height: 100%;
 }
 .home__wrapper img {
@@ -15,34 +16,21 @@ button a {
     margin-left: 7vw;
     margin-top: -10px;
 }
-.top__banner {
-    margin-top: 5vh;
-    background-color: white;
-    padding-left: 2vw;
-    height: 50px;
+.featured {
+    padding: 10px;
     display: flex;
-    justify-content: space-between;
-    width: 85vw;
-    margin-left: 7vw;
+    margin-left: 20%;
+}
+.featuredProd {
+    margin-left: 10px;
     border-radius: 15px;
+    background-color: white;
+    padding: 15px;
+    width: 500px;
 }
-.top__banner * {
-    margin-left: 15px;
-}
-.top__banner ul {
-    display: flex;
-    list-style-type: none;
-}
-.top__banner ul li {
-    margin-top: 12px;
-}
-.top__banner ul li b {
-    color: black;
-    margin-left: 3px;
-}
-.top__banner button {
-    margin-right: 2vw;
-    margin-top: 6px;
+.featured img {
+    width: 300px;
+    display: block;
 }
 .products {
     text-align: center;
@@ -62,57 +50,23 @@ button a {
     padding: 15px;
     margin-left: 15px;
     margin-top: 15px;
+    width: 300px;
 }
 .eachProduct img {
     padding-top: 15px;
-    width: 100px;
-    height: 100px;
+    width: 100%;
     margin-left: 0px;
 }
-.eachProduct p {
+/* .eachProduct p {
     width: 250px;
     height: 100px;
-}
+} */
 .prodPrice {
     height: 50px;
 }
 .prodName {
     width: 250px;
-    height: 100px;
-}
-.hamburgerOptions ul li {
-    list-style-type: none;
-    margin-top: 10px;
-}
-@media (max-width: 455px) {
-    .top__banner {
-        display: none;
-    }
-    .hamburger img {
-        width: 50px;
-        margin-left: 74vw;
-    }
-    .hamburgerOptions {
-        background-color: white;
-        padding: 15px;
-        text-align: right;
-        width: 84vw;
-        margin-left: 7vw;
-    }
-    .top__banner {
-        display: none;
-    }
-    .picture {
-        display: none;
-    }
-    .hamburger img{
-        margin-top: 5px;
-    }
-}
-@media (min-width: 456px) {
-    .hamburger {
-        display: none;
-    }
+    margin-bottom: 20px;
 }
 @media (max-width: 740px) {
     .products {

@@ -66,17 +66,18 @@ def createAdmin(request):
 
 
 # SUCCESSFUL LOGIN / REGISTER
-def success(request):
+def homePage(request):
     count = 0;
     if 'loggedInId' not in request.session:
-        messages.error(request, "You must be logged in first")
+        messages.error(request, "You must be logged in to view that page.")
         return redirect('/')
     context = {
         'loggedInUser': User.objects.get(id=request.session['loggedInId']),
         'cartItems': Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId'])),
         'cartCount': count,
         'allProducts': Product.objects.all(),
-        'orderedItems': OrderedItem.objects.all()
+        'orderedItems': OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId'])),
+        'featuredProducts': Product.objects.filter(featured=True),
     }
     for product in Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId'])):
         count += 1
@@ -99,9 +100,15 @@ def createProduct(request):
             messages.error(request, value)
         return redirect("/createItem")
     else:
-        newProduct = Product.objects.create(prodName=request.POST['pName'], description=request.POST['description'], image=request.POST['pImage'], price=request.POST['price'], created_by=User.objects.get(id=request.session['loggedInId']))
+        newProduct = Product.objects.create(prodName=request.POST['pName'], description=request.POST['description'], image=request.POST['pImage'], price=request.POST['price'], category=request.POST['category'], type=request.POST['type'], created_by=User.objects.get(id=request.session['loggedInId']))
         # Store the id of the logged in user using session
     return redirect("/home")
+
+def featureProduct(request, prodId):
+    product = Product.objects.get(id=prodId)
+    product.featured = True
+    product.save()
+    return redirect('/home')
 
 
 # DELETE ITEM
@@ -122,7 +129,7 @@ def cartPage(request):
     tax = round(tax, 2)
     orderTotal = float(total) + tax
     orderTotal = round(orderTotal, 2)
-    if orderTotal >= 50:
+    if float(total) >= 50:
         shipping = 0
     else:
         shipping = 10
