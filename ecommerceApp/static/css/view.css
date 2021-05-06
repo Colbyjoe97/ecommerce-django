@@ -1,10 +1,17 @@
 .wrapper {
     padding: 10px;
     padding-top: 60px;
+    background-color: #e0dfda;
+    padding-left: 20vw;
+    height: 100vh;
 }
-.container {
+.viewContainer {
     padding: 10px;
+    background-color: white;
     display: flex;
+    border-radius: 20px;
+    width: 1000px;
+    /* margin-left: 20vw; */
 }
 .containerRight {
     padding: 20px;
@@ -42,7 +49,8 @@
     height: 25px;
 }
 .qtyMsg {
-    margin-top: 40px;
+    margin-top: 80px;
+    margin-bottom: -20px;
 }
 .changeQty {
     margin-top: 30px;
@@ -50,14 +58,35 @@
 .qty {
     margin-left: 20px;
 }
-@media (max-width: 769) {
-    img {
-        width: 1000px;
+@media (max-width: 768px) {
+    .wrapper {
+        height: 100vh;
     }
 }
-@media (max-width: 992px) {
-    .container {
+@media (max-width: 375px) {
+    .wrapper {
+        height: 100%;
+    }
+}
+@media (max-height: 645px) {
+    .wrapper {
+        height: 100%;
+    }
+}
+@media (max-height: 555px) {
+    .wrapper {
+        height: 100%;
+    }
+}
+@media (max-width: 1065px) {
+    .viewContainer {
         flex-direction: column;
+        margin-top: 50px;
+        margin-left: -70px;
+        width: 350px;
+    }
+    .containerLeft {
+        width: 70px;
     }
     .containerLeft h5 {
         width: 300px;
@@ -70,6 +99,46 @@
         margin-left: 0px;
     }
     .wrapper {
-        padding-top: 0px;
+        padding-top: 10px;
+        padding-bottom: 30px;
+    }
+}
+@media (max-width: 1300px) {
+    .viewContainer {
+        margin-left: -10vw;
+    }
+}
+@media (max-width: 1137px) {
+    .viewContainer {
+        margin-left: -15vw;
+    }
+}
+@media (max-width: 455px) {
+    .wrapper {
+        padding-bottom: 80px;
+    }
+    .viewContainer {
+        margin-left: -17vw;
+        margin-top: 10px;
+    }
+    .containerRight {
+        margin-left: 17px;
+        margin-top: -15px;
+    }
+}
+@media (max-width: 321px) {
+    .viewContainer {
+        width: 300px;
+    }
+    .viewContainer img, .viewContainer h5 {
+        width: 200px;
+    }
+    .containerRight {
+        width: 250px;
+    }
+    .containerRight button {
+        margin-top: 80px;
+        margin-left: 0px;
+        width: 150px;
     }
 }
