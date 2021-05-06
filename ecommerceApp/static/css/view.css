@@ -1,0 +1,75 @@
+.wrapper {
+    padding: 10px;
+    padding-top: 60px;
+}
+.container {
+    padding: 10px;
+    display: flex;
+}
+.containerRight {
+    padding: 20px;
+    width: 300px;
+    height: 300px;
+    margin-top: 75px;
+    margin-left: 50px;
+    border: 3px solid whitesmoke;
+    border-radius: 10px;
+}
+.containerRight button {
+    margin-top: 100px;
+}
+.containerRight button {
+    width: 200px;
+    height: 50px;
+    margin-left: 20px;
+}
+.price {
+    /* color: red; */
+    font-weight: 900;
+}
+.containerLeft {
+    padding: 20px;
+}
+.containerLeft img {
+    margin-left: 50px;
+    width: 400px;
+}
+.qtyContainer {
+    display: flex;
+}
+.qtyRight {
+    border: 1px solid black;
+    height: 25px;
+}
+.qtyMsg {
+    margin-top: 40px;
+}
+.changeQty {
+    margin-top: 30px;
+}
+.qty {
+    margin-left: 20px;
+}
+@media (max-width: 769) {
+    img {
+        width: 1000px;
+    }
+}
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+    }
+    .containerLeft h5 {
+        width: 300px;
+    }
+    .containerLeft img {
+        width: 300px;
+        margin-left: 0px;
+    }
+    .containerRight {
+        margin-left: 0px;
+    }
+    .wrapper {
+        padding-top: 0px;
+    }
+}

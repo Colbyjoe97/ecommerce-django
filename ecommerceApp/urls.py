@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.index),
     path('register', views.registerPage),
     path('registerAccount', views.register),
-    path('adminRegister', views.adminRegisterPage),
+    path('register/admin', views.adminRegisterPage),
     path('createAdmin', views.createAdmin),
     path('login', views.login),
     path('home', views.homePage),
@@ -14,6 +14,7 @@ urlpatterns = [
 
     path('createItem', views.createPage),
     path('createProduct', views.createProduct),
+    path('product/<int:id>', views.view),
     path('delete/<int:prodId>', views.deleteProduct),
     path('cart', views.cartPage),
     path('addCart/<int:prodId>', views.addToCart),

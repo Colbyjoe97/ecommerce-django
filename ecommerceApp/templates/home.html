@@ -18,7 +18,6 @@
 <body>
     {% include 'partials/_banner.html' %}
     <div class="home__wrapper">
-<<<<<<< HEAD
 
 
         <h1 class="text-center">Featured Items</h1>
@@ -26,7 +25,7 @@
             {% for product in featuredProducts %}
                 <div class="featuredProd">
                     <div class="featuredHeader">
-                        <img src="{{product.image}}" alt="">
+                        <a href="/product/{{product.id}}"><img src="{{product.image}}" alt=""></a>
                         <b>{{product.prodName}}</b>
                     </div>
                 </div>
@@ -34,33 +33,6 @@
         </div>
 
 
-=======
-        <div class="top__banner">
-            <ul>
-                <a href="/home"><li>Home</li></a>
-                <a href="/cart"><li>Cart </a><b>({{ orderedItems.count }})</b></li>
-                    {% if loggedInUser.admin == 1 %}
-                    <a href="/createItem"><li>Create Item</li></a>
-                    {% endif %}
-                </ul>
-                <form action="logout" method="post">
-                    {% csrf_token %}
-                    <button class="btn btn-danger">Logout</button>
-                </form>
-            </div>
-            <div class="hamburger">
-                <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/hamburger-148-639651.png" alt="Hamburger">
-            </div>
-            <div class="hamburgerOptions">
-                <ul>
-                    <a href="/home"><li>Home</li></a>
-                    <a href="/cart"><li>Cart {{ cartItems.count }}</li></a>
-                    {% if loggedInUser.admin == 1 %}
-                    <a href="/createItem"><li>Create Item</li></a>
-                    {% endif %}
-                </ul>
-            </div>
->>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
         <div class="tShirt">
             <div class="category text-center">
                 <h1>T-Shirts</h1>

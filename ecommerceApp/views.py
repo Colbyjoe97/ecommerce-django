@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
 import bcrypt
-import math
+from django.http import HttpResponseRedirect
 
 # LOGIN PAGE
 def index(request):
@@ -66,13 +66,8 @@ def createAdmin(request):
 
 
 # SUCCESSFUL LOGIN / REGISTER
-<<<<<<< HEAD
 def homePage(request):
     count = 0;
-=======
-def success(request):
-    count = 0
->>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
     if 'loggedInId' not in request.session:
         messages.error(request, "You must be logged in to view that page.")
         return redirect('/')
@@ -80,12 +75,8 @@ def success(request):
         'loggedInUser': User.objects.get(id=request.session['loggedInId']),
         'cartItems': Product.objects.filter(purchased_by=User.objects.get(id=request.session['loggedInId'])),
         'allProducts': Product.objects.all(),
-<<<<<<< HEAD
         'orderedItems': OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId'])),
         'featuredProducts': Product.objects.filter(featured=True),
-=======
-        'orderedItems': OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId']))
->>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
     }
     return render(request, "home.html", context)
 
@@ -106,14 +97,11 @@ def createProduct(request):
             messages.error(request, value)
         return redirect("/createItem")
     else:
-<<<<<<< HEAD
         newProduct = Product.objects.create(prodName=request.POST['pName'], description=request.POST['description'], image=request.POST['pImage'], price=request.POST['price'], category=request.POST['category'], type=request.POST['type'], created_by=User.objects.get(id=request.session['loggedInId']))
         # Store the id of the logged in user using session
-=======
-        newProduct = Product.objects.create(prodName=request.POST['pName'], description=request.POST['description'], image=request.POST['pImage'], price=request.POST['price'], created_by=User.objects.get(id=request.session['loggedInId']))
->>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
     return redirect("/home")
 
+# ADD PRODUCT TO A LIST OF FEATURED PRODUCTS
 def featureProduct(request, prodId):
     product = Product.objects.get(id=prodId)
     product.featured = True
@@ -140,15 +128,11 @@ def cartPage(request):
     tax = round(tax, 2)
     orderTotal = float(total) + tax
     orderTotal = round(orderTotal, 2)
-<<<<<<< HEAD
-    if float(total) >= 50:
-=======
-    if orderTotal > 50:
->>>>>>> 90282e7bd99b8c316d6799f0670909b9ddf2c6f8
+    subtotal = round(orderTotal + tax, 2)
+    if float(subtotal) >= 50:
         shipping = 0
     else:
         shipping = 10
-    subtotal = round(orderTotal + tax, 2)
     orderTotal += shipping
     if shipping == 0:
         orderTotal = subtotal
@@ -178,7 +162,7 @@ def addToCart(request, prodId):
         item.save()
     else:
         item = OrderedItem.objects.create(user=User.objects.get(id=request.session['loggedInId']), item=Product.objects.get(id=prodId))
-    return redirect('/home')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 # REMOVE FROM CART
@@ -187,14 +171,16 @@ def removeFromCart(request, prodId):
     item.delete()
     return redirect('/cart')
 
+# INCREASE QUANTITY OF ITEM IN CART BY 1
 def addQuantity(request, prodId):
     item = OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId']), item=Product.objects.get(id=prodId))
     if item.exists():
         item = OrderedItem.objects.get(user=User.objects.get(id=request.session['loggedInId']), item=Product.objects.get(id=prodId))
         item.quantity += 1
         item.save()
-    return redirect('/cart')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+# REDUCE QUANTITY OF ITEM IN CART BY 1
 def removeQuantity(request, prodId):
     item = OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId']), item=Product.objects.get(id=prodId))
     if item.exists():
@@ -204,7 +190,16 @@ def removeQuantity(request, prodId):
         else:
             item.quantity -= 1
             item.save()
-    return redirect('/cart')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+# VIEW A SINGLE PRODUCT
+def view(request, id):
+    context = {
+        'product': Product.objects.get(id=id),
+        'orderedItems': OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId'])),
+        'inCart': OrderedItem.objects.filter(user=User.objects.get(id=request.session['loggedInId']), item=Product.objects.get(id=id)),
+    }
+    return render(request, 'view.html', context)
 
 # LOGOUT OF ACCOUNT
 def logout(request):
