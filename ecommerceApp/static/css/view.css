@@ -34,6 +34,10 @@
     /* color: red; */
     font-weight: 900;
 }
+.desc {
+    margin-top: 20px;
+    margin-bottom: -40px;
+}
 .containerLeft {
     padding: 20px;
 }

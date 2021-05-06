@@ -25,6 +25,7 @@
             <div class="containerRight">
                 <h1 class="price">${{product.price}}</h1>
                 <b>Free shipping on orders of $50 or more!</b><br>
+                <p class="desc">{{product.description}}</p>
                 {% if inCart %}
                     {% for product in inCart %}
                         <p class="qtyMsg">This item is in your cart!</p>

@@ -51,14 +51,16 @@
                     <p>{{ product.description }}</p>
                 </div>
                 <div class="prodPrice">
-                    <p>{{ product.price }}</p>
+                    <p>${{ product.price }}</p>
                 </div>
                 <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
                 {% if loggedInUser.admin == True %}
                     <div class=" mt-2">
-                        <a href="delete/{{product.id}}"><button class="btn btn-danger">Delete</button></a>
+                        <a href="/delete/{{product.id}}"><button class="btn btn-danger">Delete</button></a>
                         {% if product.featured == False %}
-                        <a href="feature/{{product.id}}"><button class="btn btn-secondary">Feature Item</button></a>
+                        <a href="/feature/{{product.id}}"><button class="btn btn-secondary">Feature Item</button></a>
+                        {% else %}
+                        <a href="/unfeature/{{product.id}}"><button class="btn btn-warning">Unfeature</button></a>
                         {% endif %}
                     </div>
                 {% endif %}
@@ -85,7 +87,7 @@
                     <p>{{ product.description }}</p>
                 </div>
                 <div class="prodPrice">
-                    <p>{{ product.price }}</p>
+                    <p>${{ product.price }}</p>
                 </div>
                 <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
                 {% if loggedInUser.admin == True %}
@@ -93,6 +95,8 @@
                         <a href="delete/{{product.id}}"><button class="btn btn-danger">Delete</button></a>
                         {% if product.featured == False %}
                         <a href="feature/{{product.id}}"><button class="btn btn-secondary">Feature Item</button></a>
+                        {% else %}
+                        <a href="/unfeature/{{product.id}}"><button class="btn btn-warning">Unfeature</button></a>
                         {% endif %}
                     </div>
                 {% endif %}

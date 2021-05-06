@@ -109,6 +109,14 @@ def featureProduct(request, prodId):
     return redirect('/home')
 
 
+# REMOVE PRODUCT FROM LIST OF FEATURED PRODUCTS
+def unfeature(request, prodId):
+    product = Product.objects.get(id=prodId)
+    product.featured = False
+    product.save()
+    return redirect('/home')
+
+
 # DELETE ITEM
 def deleteProduct(request, prodId):
     productToDelete = Product.objects.get(id=prodId)

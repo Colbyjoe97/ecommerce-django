@@ -22,4 +22,5 @@ urlpatterns = [
     path('add/<int:prodId>', views.addQuantity),
     path('remove/<int:prodId>', views.removeQuantity),
     path('feature/<int:prodId>', views.featureProduct),
+    path('unfeature/<int:prodId>', views.unfeature),
 ]
