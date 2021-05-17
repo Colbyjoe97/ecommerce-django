@@ -67,7 +67,6 @@ def createAdmin(request):
 
 # SUCCESSFUL LOGIN / REGISTER
 def homePage(request):
-    count = 0;
     if 'loggedInId' not in request.session:
         messages.error(request, "You must be logged in to view that page.")
         return redirect('/')
@@ -86,42 +85,62 @@ def createPage(request):
     context = {
         'loggedInUser': User.objects.get(id=request.session['loggedInId']),
     }
-    return render(request, "create.html", context)
+    user = User.objects.get(id=request.session['loggedInId'])
+    if user.admin == True:
+        return render(request, "create.html", context)
+    else:
+        return redirect('/home')
 
 
 # CREATE PRODUCT
 def createProduct(request):
     validatorErrors = Product.objects.productValidator(request.POST)
-    if len(validatorErrors) > 0:
-        for key, value in validatorErrors.items():
-            messages.error(request, value)
-        return redirect("/createItem")
+    user = User.objects.get(id=request.session['loggedInId'])
+    if user.admin == True:
+        if len(validatorErrors) > 0:
+            for key, value in validatorErrors.items():
+                messages.error(request, value)
+            return redirect("/createItem")
+        else:
+            newProduct = Product.objects.create(prodName=request.POST['pName'], description=request.POST['description'], image=request.POST['pImage'], price=request.POST['price'], category=request.POST['category'], type=request.POST['type'], created_by=User.objects.get(id=request.session['loggedInId']))
+            # Store the id of the logged in user using session
+        return redirect("/home")
     else:
-        newProduct = Product.objects.create(prodName=request.POST['pName'], description=request.POST['description'], image=request.POST['pImage'], price=request.POST['price'], category=request.POST['category'], type=request.POST['type'], created_by=User.objects.get(id=request.session['loggedInId']))
-        # Store the id of the logged in user using session
-    return redirect("/home")
+        return redirect('/home')
 
 # ADD PRODUCT TO A LIST OF FEATURED PRODUCTS
 def featureProduct(request, prodId):
-    product = Product.objects.get(id=prodId)
-    product.featured = True
-    product.save()
-    return redirect('/home')
+    user = User.objects.get(id=request.session['loggedInId'])
+    if user.admin == True:
+        product = Product.objects.get(id=prodId)
+        product.featured = True
+        product.save()
+        return redirect('/home')
+    else:
+        return redirect('/home')
 
 
 # REMOVE PRODUCT FROM LIST OF FEATURED PRODUCTS
 def unfeature(request, prodId):
-    product = Product.objects.get(id=prodId)
-    product.featured = False
-    product.save()
-    return redirect('/home')
+    user = User.objects.get(id=request.session['loggedInId'])
+    if user.admin == True:
+        product = Product.objects.get(id=prodId)
+        product.featured = False
+        product.save()
+        return redirect('/home')
+    else:
+        return redirect('/home')
 
 
 # DELETE ITEM
 def deleteProduct(request, prodId):
-    productToDelete = Product.objects.get(id=prodId)
-    productToDelete.delete()
-    return redirect('/home')
+    user = User.objects.get(id=request.session['loggedInId'])
+    if user.admin == True:
+        productToDelete = Product.objects.get(id=prodId)
+        productToDelete.delete()
+        return redirect('/home')
+    else:
+        return redirect('/home')
 
 # SHOPPING CART PAGE
 def cartPage(request):

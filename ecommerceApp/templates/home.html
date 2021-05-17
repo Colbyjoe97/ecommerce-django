@@ -38,22 +38,22 @@
                 <h1>T-Shirts</h1>
             </div>
             <div class="products">
-            {% for product in allProducts %}
-                {% if product.type == 'shirt' %}
-            <div class="eachProduct">
-                <div class="prodImage">
-                    <img src="{{product.image}}" alt="{{product.prodName}}">
-                </div>
-                <div class="prodName">
-                    <b>{{ product.prodName }}</b>
-                </div>
-                <div class="prodDesc">
-                    <p>{{ product.description }}</p>
-                </div>
-                <div class="prodPrice">
-                    <p>${{ product.price }}</p>
-                </div>
-                <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
+        {% for product in allProducts %}
+            {% if product.type == 'shirt' %}
+        <div class="eachProduct">
+            <div class="prodImage">
+                <img src="{{product.image}}" alt="{{product.prodName}}">
+            </div>
+            <div class="prodName">
+                <b>{{ product.prodName }}</b>
+            </div>
+            <div class="prodDesc">
+                <p>{{ product.description }}</p>
+            </div>
+            <div class="prodPrice">
+                <p>${{ product.price }}</p>
+            </div>
+            <a href="/addCart/{{product.id}}"><button class="btn btn-success">Add to Cart</button></a>
                 {% if loggedInUser.admin == True %}
                     <div class=" mt-2">
                         <a href="/delete/{{product.id}}"><button class="btn btn-danger">Delete</button></a>
@@ -64,9 +64,9 @@
                         {% endif %}
                     </div>
                 {% endif %}
-            </div>
-                {% endif %}
-            {% endfor %}
+            {% endif %}
+        {% endfor %}
+        </div>
             </div>
         </div>
         <div class="shoes">
